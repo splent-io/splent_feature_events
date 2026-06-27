@@ -1,0 +1,39 @@
+# Spanish translations for splent_feature_events.
+# Copyright (C) 2026 splent-io
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: splent_feature_events\n"
+"POT-Creation-Date: 2026-06-27 22:40+0000\n"
+"PO-Revision-Date: 2026-06-28 00:00+0000\n"
+"Language: es\n"
+"Language-Team: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: src/splent_io/splent_feature_events/templates/events/detail.html:21
+msgid "More info"
+msgstr "Más información"
+
+#: src/splent_io/splent_feature_events/templates/events/detail.html:23
+msgid "Back to events"
+msgstr "Volver a eventos"
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:6
+msgid "Programme"
+msgstr "Programa"
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:6
+msgid "Events"
+msgstr "Eventos"
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:7
+msgid "Talks, workshops and competitions."
+msgstr "Charlas, talleres y competiciones."
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:24
+msgid "No events yet."
+msgstr "Aún no hay eventos."

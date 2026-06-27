@@ -1,0 +1,44 @@
+# English translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-27 22:40+0000\n"
+"PO-Revision-Date: 2026-06-27 22:40+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: src/splent_io/splent_feature_events/templates/events/detail.html:21
+msgid "More info"
+msgstr ""
+
+#: src/splent_io/splent_feature_events/templates/events/detail.html:23
+msgid "Back to events"
+msgstr ""
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:6
+msgid "Programme"
+msgstr ""
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:6
+msgid "Events"
+msgstr ""
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:7
+msgid "Talks, workshops and competitions."
+msgstr ""
+
+#: src/splent_io/splent_feature_events/templates/events/list.html:24
+msgid "No events yet."
+msgstr ""
+

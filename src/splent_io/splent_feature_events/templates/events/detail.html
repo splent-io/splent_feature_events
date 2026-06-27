@@ -1,0 +1,25 @@
+{% extends "public_base.html" %}
+
+{% block title %}{{ event.title }} — {{ SPLENT_APP }}{% endblock %}
+
+{% block hero %}
+    {{ render_block('hero', eyebrow=event.kind, title=event.title, subtitle=event.summary) }}
+{% endblock %}
+
+{% block content %}
+<article class="container section">
+    <p class="card__meta">
+        {% if event.room %}📍 {{ event.room }}{% endif %}
+        {% if event.starts_at %} · 🕒 {{ event.starts_at.strftime('%A %d %B, %H:%M') }}{% endif %}
+        {% if event.speaker %} · 🎤 {{ event.speaker }}{% endif %}
+    </p>
+    {% if event.image %}
+    <img src="{{ event.image }}" alt="" style="max-width:100%;border-radius:var(--brand-radius);margin:1rem 0">
+    {% endif %}
+    <div class="prose">{{ event.description | safe }}</div>
+    {% if event.link %}
+    <p style="margin-top:1.5rem"><a class="btn btn-primary" href="{{ event.link }}">{{ _('More info') }}</a></p>
+    {% endif %}
+    <p style="margin-top:2rem"><a href="{{ url_for('events.index') }}">← {{ _('Back to events') }}</a></p>
+</article>
+{% endblock %}

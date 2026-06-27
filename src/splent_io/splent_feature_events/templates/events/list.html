@@ -1,0 +1,28 @@
+{% extends "public_base.html" %}
+
+{% block title %}Events — {{ SPLENT_APP }}{% endblock %}
+
+{% block hero %}
+    {{ render_block('hero', eyebrow=_('Programme'), title=_('Events'),
+                    subtitle=_('Talks, workshops and competitions.')) }}
+{% endblock %}
+
+{% block content %}
+<div class="container section">
+    <div class="card-grid">
+        {% for e in events %}
+        <a class="card" href="{{ url_for('events.detail', slug=e.slug) }}">
+            {% if e.image %}<img class="card__img" src="{{ e.image }}" alt="">{% endif %}
+            <span class="badge">{{ e.kind }}</span>
+            <h3 class="card__title">{{ e.title }}</h3>
+            {% if e.summary %}<p class="card__text">{{ e.summary }}</p>{% endif %}
+            {% if e.room or e.starts_at %}
+            <p class="card__meta">{{ e.room }}{% if e.starts_at %} · {{ e.starts_at.strftime('%d %b %H:%M') }}{% endif %}</p>
+            {% endif %}
+        </a>
+        {% else %}
+        <p class="card__text">{{ _('No events yet.') }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
