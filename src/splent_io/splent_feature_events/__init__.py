@@ -8,11 +8,17 @@ events_bp = create_blueprint(__name__)
 
 
 def init_feature(app):
+    from splent_framework.assets.asset_registry import register_asset
+
     # Events are managed through their OWN custom admin screens (see routes.py
     # and hooks.py) — the WordPress-plugin pattern — instead of the generic
     # admin resource, so it does not call register_admin_resource.
     register_service(app, "EventsService", EventsService)
     register_nav_item(key="events", label="Events", href="/events", order=10)
+    # Public event-detail stylesheet (token-driven; styled by the active skin).
+    register_asset(
+        "css", "events.assets", order=100, subfolder="css", filename="events.css"
+    )
 
 
 def inject_context_vars(app):

@@ -7,19 +7,49 @@
 {% endblock %}
 
 {% block content %}
-<article class="container section">
-    <p class="card__meta">
-        {% if event.room %}📍 {{ event.room }}{% endif %}
-        {% if event.starts_at %} · 🕒 {{ event.starts_at.strftime('%A %d %B, %H:%M') }}{% endif %}
-        {% if event.speaker %} · 🎤 {{ event.speaker }}{% endif %}
-    </p>
+<article class="container section event-detail">
+    {% if event.room or event.starts_at or event.speaker %}
+    <ul class="event-meta">
+        {% if event.room %}
+        <li class="event-meta__item">
+            <svg class="event-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span class="event-meta__label">{{ _('Room') }}</span>
+            <span class="event-meta__value">{{ event.room }}</span>
+        </li>
+        {% endif %}
+        {% if event.starts_at %}
+        <li class="event-meta__item">
+            <svg class="event-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+            </svg>
+            <span class="event-meta__label">{{ _('When') }}</span>
+            <span class="event-meta__value">{{ event.starts_at.strftime('%A %d %B, %H:%M') }}</span>
+        </li>
+        {% endif %}
+        {% if event.speaker %}
+        <li class="event-meta__item">
+            <svg class="event-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/>
+            </svg>
+            <span class="event-meta__label">{{ _('Speaker') }}</span>
+            <span class="event-meta__value">{{ event.speaker }}</span>
+        </li>
+        {% endif %}
+    </ul>
+    {% endif %}
+
     {% if event.image %}
-    <img src="{{ event.image }}" alt="" style="max-width:100%;border-radius:var(--brand-radius);margin:1rem 0">
+    <img class="event-detail__image" src="{{ event.image }}" alt="">
     {% endif %}
+
     <div class="prose">{{ event.description | safe }}</div>
+
     {% if event.link %}
-    <p style="margin-top:1.5rem"><a class="btn btn-primary" href="{{ event.link }}">{{ _('More info') }}</a></p>
+    <p class="event-detail__actions"><a class="btn btn-primary" href="{{ event.link }}">{{ _('More info') }}</a></p>
     {% endif %}
-    <p style="margin-top:2rem"><a href="{{ url_for('events.index') }}">← {{ _('Back to events') }}</a></p>
+
+    <p><a class="event-detail__back" href="{{ url_for('events.index') }}">← {{ _('Back to events') }}</a></p>
 </article>
 {% endblock %}
