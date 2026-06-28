@@ -72,9 +72,7 @@ def _ordered_groups():
 
 
 def _known_groups():
-    existing = [
-        g[0] for g in db.session.query(Event.kind).distinct().all() if g[0]
-    ]
+    existing = [g[0] for g in db.session.query(Event.kind).distinct().all() if g[0]]
     seen, out = set(), []
     for g in KNOWN_KINDS + existing:
         if g and g not in seen:

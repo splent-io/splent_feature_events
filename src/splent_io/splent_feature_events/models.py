@@ -11,9 +11,11 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     slug = db.Column(db.String(255), nullable=False, unique=True, index=True)
-    kind = db.Column(db.String(64), default="talk")  # talk|workshop|competition|ceremony
+    kind = db.Column(
+        db.String(64), default="talk"
+    )  # talk|workshop|competition|ceremony
     summary = db.Column(db.Text, default="")
-    description = db.Column(db.Text, default="")      # rich text / HTML
+    description = db.Column(db.Text, default="")  # rich text / HTML
     speaker = db.Column(db.String(255), default="")
     room = db.Column(db.String(128), default="")
     starts_at = db.Column(db.DateTime)

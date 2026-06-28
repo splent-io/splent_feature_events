@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_events"
-version = "0.0.1"
+version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.13"
 
@@ -23,34 +23,30 @@ exclude = ["*.tests", "*.tests.*"]
 [tool.splent]
 cli_version = "1.11.0"
 
-# ── Feature Contract ──────────────────────────────────────────────────────────
-# Declares what this feature provides to and requires from the product.
-# Used by `splent feature:check` and `splent product:derive` for validation.
+# ── Feature Contract (auto-generated) ────────────────────────────────────────
+# Do not edit manually — re-run `splent feature:contract --write` to refresh.
 [tool.splent.contract]
 description = "Events — talks, workshops, competitions and ceremonies (public list/detail + admin CRUD)"
 
 [tool.splent.contract.provides]
-# Routes exposed by this feature
-routes = ["/events", "/events/<slug>"]
-# Blueprint names registered into Flask
-blueprints = ["events_bp"]
-# SQLAlchemy models introduced by this feature
-models = ["Event"]
-# CLI commands added by this feature
-commands = []
+routes     = ["/admin/events", "/admin/events/<int:event_id>/delete", "/admin/events/<int:event_id>/edit", "/admin/events/<int:event_id>/move", "/admin/events/new", "/events", "/events/<slug>"]
+blueprints = []
+models     = ["Event"]
+commands   = ["hello"]
+hooks      = ["layout.authenticated_sidebar"]
+services   = ["EventsService"]
+signals    = []
+translations = ["en", "es"]
+docker     = []
 
 [tool.splent.contract.requires]
-# Other SPLENT features this feature depends on (e.g. ["auth", "mail"])
-features = ["theme"]
-# Environment variables this feature expects to be set
+features = []
 env_vars = []
+signals  = []
 
-# ── Extension points ──────────────────────────────────────────────────────────
-# Declares what other features can override or extend via refinement.
-# See: splent feature:xray
 [tool.splent.contract.extensible]
-services = []
-templates = ["events/list.html", "events/detail.html"]
-models = []
-hooks = []
-routes = false
+services  = ["EventsService"]
+templates = ["events/admin/form.html", "events/admin/list.html", "events/detail.html", "events/index.html", "events/list.html"]
+models    = ["Event"]
+hooks     = ["layout.authenticated_sidebar"]
+routes    = false
