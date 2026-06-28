@@ -3,7 +3,7 @@
 {% block title %}{{ 'Edit event' if event else 'Add event' }}{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex flex-column align-items-start gap-2 mb-4">
     <h1 class="h3 mb-0">{{ 'Edit event' if event else 'Add event' }}</h1>
     <a href="{{ url_for('events.admin_index') }}" class="btn btn-outline-secondary">← Back to events</a>
 </div>
