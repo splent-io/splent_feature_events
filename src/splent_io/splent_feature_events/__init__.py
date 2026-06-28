@@ -1,4 +1,5 @@
 from splent_framework.blueprints.base_blueprint import create_blueprint
+from splent_framework.nav.nav_registry import register_nav_item
 from splent_framework.services.service_locator import register_service
 
 from splent_io.splent_feature_events.services import EventsService
@@ -11,6 +12,7 @@ def init_feature(app):
     # and hooks.py) — the WordPress-plugin pattern — instead of the generic
     # admin resource, so it does not call register_admin_resource.
     register_service(app, "EventsService", EventsService)
+    register_nav_item(key="events", label="Events", href="/events", order=10)
 
 
 def inject_context_vars(app):
