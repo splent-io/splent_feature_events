@@ -1,0 +1,68 @@
+{% extends "base_template.html" %}
+
+{% block title %}Events{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-0">Events</h1>
+        <p class="text-muted mb-0">Manage events and their kinds.</p>
+    </div>
+    <a href="{{ url_for('events.admin_new') }}" class="btn btn-primary">+ Add event</a>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'danger' else 'success' }} py-2">{{ message }}</div>
+    {% endfor %}
+{% endwith %}
+
+{% for group, events in groups.items() %}
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>{{ group }}</strong>
+        <span class="badge bg-secondary">{{ events | length }}</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <tbody>
+                {% for e in events %}
+                <tr>
+                    <td style="width:52px">
+                        {% if e.image %}
+                        <img src="{{ e.image }}" alt="" style="width:38px;height:38px;border-radius:6px;object-fit:cover">
+                        {% else %}
+                        <span class="d-inline-flex align-items-center justify-content-center bg-light text-muted" style="width:38px;height:38px;border-radius:6px">{{ e.title[:1] | upper }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ e.title }}</strong>
+                        {% if not e.published %}<span class="badge bg-warning text-dark ms-1">draft</span>{% endif %}
+                        <div class="text-muted small">
+                            {% if e.starts_at %}{{ e.starts_at.strftime('%Y-%m-%d %H:%M') }}{% endif %}
+                            {% if e.room %} · {{ e.room }}{% endif %}
+                            {% if e.speaker %} · {{ e.speaker }}{% endif %}
+                        </div>
+                    </td>
+                    <td style="width:240px">
+                        <form method="POST" action="{{ url_for('events.admin_move', event_id=e.id) }}" class="d-flex gap-1">
+                            <select name="group" class="form-select form-select-sm">
+                                {% for g in known_groups %}<option value="{{ g }}" {{ 'selected' if g == e.kind else '' }}>{{ g }}</option>{% endfor %}
+                            </select>
+                            <button class="btn btn-sm btn-outline-secondary" type="submit" title="Move to kind">Move</button>
+                        </form>
+                    </td>
+                    <td style="width:150px" class="text-end">
+                        <a href="{{ url_for('events.admin_edit', event_id=e.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <form method="POST" action="{{ url_for('events.admin_delete', event_id=e.id) }}" class="d-inline" onsubmit="return confirm('Remove {{ e.title }}?')">
+                            <button class="btn btn-sm btn-outline-danger" type="submit" title="Remove">✕</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

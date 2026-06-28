@@ -1,0 +1,73 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ 'Edit event' if event else 'Add event' }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">{{ 'Edit event' if event else 'Add event' }}</h1>
+    <a href="{{ url_for('events.admin_index') }}" class="btn btn-outline-secondary">← Back to events</a>
+</div>
+
+<form method="POST" class="card">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label class="form-label">Title *</label>
+                <input name="title" class="form-control" required value="{{ event.title if event else '' }}">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Kind</label>
+                <input name="kind" class="form-control" list="known-groups" value="{{ event.kind if event else 'talk' }}" placeholder="Pick an existing kind or type a new one">
+                <datalist id="known-groups">{% for g in known_groups %}<option value="{{ g }}">{% endfor %}</datalist>
+                <div class="form-text">Type a new name to create a new kind.</div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Speaker</label>
+                <input name="speaker" class="form-control" value="{{ event.speaker if event else '' }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Room</label>
+                <input name="room" class="form-control" value="{{ event.room if event else '' }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Starts at</label>
+                <input name="starts_at" type="datetime-local" class="form-control" value="{{ event.starts_at.strftime('%Y-%m-%dT%H:%M') if event and event.starts_at else '' }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Ends at</label>
+                <input name="ends_at" type="datetime-local" class="form-control" value="{{ event.ends_at.strftime('%Y-%m-%dT%H:%M') if event and event.ends_at else '' }}">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Summary</label>
+                <textarea name="summary" class="form-control" rows="2">{{ event.summary if event else '' }}</textarea>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="5">{{ event.description if event else '' }}</textarea>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Image URL</label>
+                <input name="image" class="form-control" value="{{ event.image if event else '' }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Link URL</label>
+                <input name="link" type="url" class="form-control" value="{{ event.link if event else '' }}">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Order</label>
+                <input name="order" type="number" class="form-control" value="{{ event.order if event else 0 }}">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="published" id="published" {{ 'checked' if (event.published if event else True) else '' }}>
+                    <label class="form-check-label" for="published">Published</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-end">
+        <a href="{{ url_for('events.admin_index') }}" class="btn btn-link text-muted">Cancel</a>
+        <button class="btn btn-primary" type="submit">{{ 'Save changes' if event else 'Add event' }}</button>
+    </div>
+</form>
+{% endblock %}
