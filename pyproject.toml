@@ -25,8 +25,11 @@ cli_version = "1.11.0"
 
 # ── Feature Contract (auto-generated) ────────────────────────────────────────
 # Do not edit manually — re-run `splent feature:contract --write` to refresh.
+# Preserved across refreshes: description, category, tags, env, and
+# requires.features_manual (dependencies invisible to static analysis).
 [tool.splent.contract]
 description = "Events — talks, workshops, competitions and ceremonies (public list/detail + admin CRUD)"
+archetype = "full"
 
 [tool.splent.contract.provides]
 routes     = ["/admin/events", "/admin/events/<int:event_id>/delete", "/admin/events/<int:event_id>/edit", "/admin/events/<int:event_id>/move", "/admin/events/new", "/events", "/events/<slug>"]
