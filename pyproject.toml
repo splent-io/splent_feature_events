@@ -28,7 +28,7 @@ cli_version = "1.11.0"
 # Preserved across refreshes: description, category, tags, env, and
 # requires.features_manual (dependencies invisible to static analysis).
 [tool.splent.contract]
-description = "Events — talks, workshops, competitions and ceremonies (public list/detail + admin CRUD)"
+description = "Events (talks, workshops, competitions and ceremonies) with public list/detail and admin CRUD"
 archetype = "full"
 
 [tool.splent.contract.provides]
